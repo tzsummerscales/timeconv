@@ -187,11 +187,12 @@
 
 <p> <?php 
 	if (!strcmp("time", $_POST['timevsgps'])) {
-	    if (!strcmp("pm", $_POST['type'])){
-		$hour = (int)$_POST['hour'] + 12;
-	    } else {
-		$hour = $_POST['hour'];
-	    }
+	    $hour = $_POST['hour'];
+            if (!strcmp("pm", $_POST['type']) && $hour<12){
+                $hour = $hour + 12;
+            } elseif (!strcmp("am", $_POST['type']) && $hour==12){
+                $hour = 0;
+            }
             $month = $_POST['month']; 
 	    $day = $_POST['day'];
 	    $year = $_POST['year'];
