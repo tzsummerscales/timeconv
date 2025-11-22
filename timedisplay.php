@@ -101,18 +101,18 @@
          echo gmstrftime("%H:%M:%S", $unixTime);
       }
       echo "</td><td>UTC";
-      putenv("TZ=US/Central");
+      date_default_timezone_set('America/Chicago');
       echo "</td></tr><tr>";
       echo "<td>Central</td><td>".strftime("%b %d, %Y", $unixTime);
       echo "</td><td>";
       if (isleap($gpsTime)) {
-	 echo strftime("%H:%M", $unixTime-1);
+	  echo strftime("%H:%M", $unixTime-1);
          echo ":60";
       } else {
          echo strftime("%H:%M:%S", $unixTime);
       }
       echo "</td><td>".strftime("%Z", $unixTime);
-      putenv("TZ=US/Pacific");
+      date_default_timezone_set('America/Los_Angeles');
       echo "</td></tr><tr>";
       echo "<td>Pacific</td><td>".strftime("%b %d, %Y", $unixTime);
       echo "</td><td>";
@@ -138,10 +138,10 @@
       if (!strcmp("UTC", $zone)) {
           $unixTime = gmmktime($hour, $min, $sec, $monthn, $day, $year);
       } elseif (!strcmp("Central", $zone)) {
-          putenv("TZ=US/Central");
+          date_default_timezone_set('America/Chicago');
           $unixTime = mktime($hour, $min, $sec, $monthn, $day, $year);
       } elseif (!strcmp("Pacific", $zone)) {
-          putenv("TZ=US/Pacific");
+          date_default_timezone_set('America/Los_Angeles');
           $unixTime = mktime($hour, $min, $sec, $monthn, $day, $year);
       } else {
 	  echo "ERROR: Invalid Time Zone! \n";
